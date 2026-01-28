@@ -156,12 +156,14 @@ fd00::/8 \
 	# https://owasp.org/www-project-secure-headers/
 	header {
 		defer
+		# Headers marked with `?` are defaults and only set if not present
+
 		# Prevent clickjacking attacks by disabling iframe embedding
-		X-Frame-Options "SAMEORIGIN"
+		?X-Frame-Options "SAMEORIGIN"
 		# Prevent MIME type sniffing attacks
-		X-Content-Type-Options "nosniff"
+		?X-Content-Type-Options "nosniff"
 		# Control referrer information sent with requests
-		Referrer-Policy "strict-origin-when-cross-origin"
+		?Referrer-Policy "strict-origin-when-cross-origin"
 		# Remove server identification headers
 		-Server
 		-X-Powered-By
@@ -171,7 +173,8 @@ fd00::/8 \
 (security-https) {
 	header {
 		defer
-		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		# Headers marked with `?` are defaults and only set if not present
+		?Strict-Transport-Security "max-age=31536000; includeSubDomains"
 	}
 }
 
